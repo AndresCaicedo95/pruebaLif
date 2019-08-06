@@ -1,31 +1,15 @@
 import Configuration from '../../Configuracion/Configuration';
 
-class ItemService {
+class LiftitService {
 
   constructor() {
     this.config = new Configuration();
   }
 
-  async retrieveItems() {
-
-    return fetch(this.config.ITEM_COLLECTION_URL)
-      .then(response => {
-        if (!response.ok) {
-          this.handleResponseError(response);
-        }
-        return response.json();
-        
-      })
-      .then(json => {
-        console.log("Retrieved items:");
-        console.log(json);
-        return json;
-      })
-      .catch(error => {
-        this.handleError(error);
-      });
-
-    
+  async registrarUsuario(valores) {
+    console.log(valores);
+    localStorage.setItem(valores.email,valores.password);
+    return true;
   }
 
   async getItem(itemLink) {
@@ -125,4 +109,4 @@ class ItemService {
 
 }
 
-export default ItemService;
+export default LiftitService;

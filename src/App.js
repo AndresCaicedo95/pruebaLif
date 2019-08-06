@@ -5,16 +5,18 @@ import './App.css';
 import Registro from './components/registro';
 import Pagina from './components/pagina';
 import Login from './components/login';
-
-//import EditItem from './components/edit-item';
-
-//import ItemService from './services/API/item-service';
+import LiftitService from './services/API/liftit-service';
 
 class App extends Component {
 
   constructor(props) {
 
     super(props);
+
+    this.liftitService = new LiftitService();
+    this.onCancel = this.onCancel.bind(this);
+    this.onRegistro = this.onRegistro.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
 
@@ -27,7 +29,18 @@ class App extends Component {
 
   }
 
-  onSubmit(state){
+  onCancel() {
+
+    this.setState({
+      login: true,
+      registro: false,
+      pagina:false ,
+      paginalogin:false
+    });
+
+  }
+
+  onSubmit(valores){
 
     this.setState({
       login: false,
@@ -38,11 +51,18 @@ class App extends Component {
   }
 
   onRegistro() {
+    
     this.setState({
       login: false,
       registro: true,
       pagina: false,
       paginalogin: false
+    });
+  }
+
+  onSubmitRegistro(valores){
+    this.liftitService.registrarUsuario(valores).then(res => {
+      this.onCancel(); 
     });
   }
 
@@ -56,7 +76,7 @@ class App extends Component {
       <div className="App">
         {login && <Login onSubmit={this.onSubmit} onRegistro={this.onRegistro}/>}
     
-        {registro && <Registro onCancel={this.onCreateItem} onSubmitRegistro={this.onSubmitRegistro}/>}
+        {registro && <Registro onCancel={this.onCancel} onSubmitRegistro={this.onSubmitRegistro}/>}
 
         {pagina && paginaLogin && <Pagina />}
 

@@ -12,6 +12,13 @@ class Registro extends Component {
 
     this.onCancel = this.onCancel.bind(this);
 
+    this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.state = {
+      email: '',
+      password: ''
+    }
+
   }
 
   onCancel() {
@@ -31,7 +38,7 @@ class Registro extends Component {
 
       <div className="input-panel">
 
-      <span className="form-caption">Login:</span>
+      <span className="form-caption">Registro:</span>
 
       <div>
 
@@ -47,7 +54,7 @@ class Registro extends Component {
 
         <label className="field-name">password:<br/>
 
-          <input value={this.state.username} type="password" name="password" required onChange={this.handleInputChange} placeholder="password" />
+          <input value={this.state.password} type="password" name="password" required onChange={this.handleInputChange} placeholder="password" />
 
         </label>
 
@@ -61,6 +68,22 @@ class Registro extends Component {
       </div>
 
     );
+
+  }
+
+  handleInputChange(event) {
+
+    const target = event.target;
+
+    const value = target.value;
+
+    const name = target.name;
+
+    this.setState({
+
+      [name]: value
+
+    });
 
   }
 

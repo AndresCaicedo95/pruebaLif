@@ -15,13 +15,28 @@ class Login extends Component {
 
     this.onRegistro = this.onRegistro.bind(this);
 
+    this.handleInputChange = this.handleInputChange.bind(this);
 
     this.state = {
-
       email: '',
       password: '',
-
     };
+
+  }
+
+  handleInputChange(event) {
+
+    const target = event.target;
+
+    const value = target.value;
+
+    const name = target.name;
+
+    this.setState({
+
+      [name]: value
+
+    });
 
   }
 
@@ -35,7 +50,6 @@ class Login extends Component {
   onSubmit() {
     this.props.onSubmit(this.state);
   }
-
 
   render() {
 
@@ -59,7 +73,7 @@ class Login extends Component {
 
         <label className="field-name">password:<br/>
 
-          <input value={this.state.username} type="password" name="password" required onChange={this.handleInputChange} placeholder="password" />
+          <input value={this.state.password} type="password" name="password" required onChange={this.handleInputChange} placeholder="password" />
 
         </label>
 
