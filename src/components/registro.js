@@ -29,6 +29,11 @@ class Registro extends Component {
 
   onSubmitRegistro() {
     this.props.onSubmitRegistro(this.state);
+    
+    this.setState ( {
+      email: '',
+      password: ''
+    })
   }
 
 

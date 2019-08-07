@@ -9,8 +9,6 @@ class Pagina extends Component {
 
     super(props);
 
-    
-
     this.onCancel = this.onCancel.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,26 +17,19 @@ class Pagina extends Component {
     this.state = {
 
       origen:'' ,
-
       destino: '',
       descripcion: ''
 
     };
-
   }
 
 
   onCancel() {
-
     this.props.onCancel();
-
   }
 
   onSubmit() {
-
       this.props.onSubmit(this.state);
-
-
   }
 
   render() {
@@ -47,13 +38,13 @@ class Pagina extends Component {
       
       <div className="input-panel">
 
-      <span className="form-caption">Login:</span>
+      <span className="form-caption">Servicio:</span>
 
       <div>
 
-        <label className="field-name">Email:<br/>
+        <label className="field-name">Dirección origen:<br/>
 
-          <input value={this.state.email} name="email" required onChange={this.handleInputChange} placeholder="email" />
+          <input value={this.state.origen} name="origen" required onChange={this.handleInputChange} placeholder="origen" />
 
         </label>
 
@@ -61,13 +52,43 @@ class Pagina extends Component {
 
       <div>
 
-        <label className="field-name">password:<br/>
+        <label className="field-name">Dirección destino:<br/>
 
-          <input value={this.state.username} type="password" name="password" required onChange={this.handleInputChange} placeholder="password" />
+          <input value={this.state.destino}  name="destino" required onChange={this.handleInputChange} placeholder="destino" />
 
         </label>
 
       </div>
+
+      <div>
+
+        <label className="field-name">descripcion:<br/>
+
+        <input value={this.state.descripcion}  name="descripcion" required onChange={this.handleInputChange} placeholder="descripcion" />
+
+      </label>
+
+      </div>
+
+      
+      <div>
+
+        <label className="field-name">tiempo estimado ruta: 
+        </label>
+        <label className="field-name">{this.state.tiempo}<br/>
+        </label>
+      
+      </div>
+
+      <div>
+
+        <label className="field-name">distancia: 
+        </label>
+        <label className="field-name">{this.state.distancia}<br/>
+        </label>
+
+      </div>
+
       <br/>
 
       <button onClick={() => this.onCancel()}>Cancelar</button> 

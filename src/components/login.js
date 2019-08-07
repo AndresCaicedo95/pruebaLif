@@ -49,6 +49,11 @@ class Login extends Component {
 
   onSubmit() {
     this.props.onSubmit(this.state);
+    
+    this.setState ( {
+      email: '',
+      password: '',
+    });
   }
 
   render() {

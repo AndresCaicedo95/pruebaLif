@@ -5,7 +5,18 @@ import './App.css';
 import Registro from './components/registro';
 import Pagina from './components/pagina';
 import Login from './components/login';
-import LiftitService from './services/API/liftit-service';
+import LiftitService from './services/API/liftit-auth-service';
+
+import * as firebase from 'firebase'
+
+const config = {
+  apiKey: 'AIzaSyDrJZ-gveVzsC_a9FbA_J3vhNzK3Cm5o3U',
+  authDomain: 'pruebaliftit-1565109301603.firebaseapp.com',
+  databaseURL: 'https://pruebaliftit-1565109301603.firebaseio.com',
+  storageBucket: 'pruebaliftit-1565109301603.appspot.com',
+  messagingSenderId: '7968**********'
+}
+firebase.initializeApp(config)
 
 class App extends Component {
 
@@ -14,9 +25,11 @@ class App extends Component {
     super(props);
 
     this.liftitService = new LiftitService();
+    console.log(this.liftitService);
     this.onCancel = this.onCancel.bind(this);
     this.onRegistro = this.onRegistro.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmitRegistro = this.onSubmitRegistro.bind(this);
 
     this.state = {
 
@@ -41,13 +54,18 @@ class App extends Component {
   }
 
   onSubmit(valores){
-
-    this.setState({
-      login: false,
-      registro: true,
-      pagina: false,
-      paginalogin: false
-    });
+    this.liftitService.loginUser(valores.email,valores.password).then(data => {
+      if(data){
+        this.setState({
+          login: false,
+          registro: false,
+          pagina: true,
+          paginalogin: true
+        });
+      }else{
+        this.onCancel();
+      }
+    })
   }
 
   onRegistro() {
@@ -61,9 +79,8 @@ class App extends Component {
   }
 
   onSubmitRegistro(valores){
-    this.liftitService.registrarUsuario(valores).then(res => {
-      this.onCancel(); 
-    });
+    this.liftitService.crearUsuario(valores.email,valores.password)
+    this.onCancel() 
   }
 
   render() {
